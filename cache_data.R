@@ -1,6 +1,8 @@
 library(tidyverse)
 library(covidData)
 
+if (!dir.exists("data")) dir.create("data")
+
 for (pathogen in c("covid", "flu")) {
     data <- covidData::load_data(
         spatial_resolution = c("state", "national"),
