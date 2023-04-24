@@ -4,8 +4,11 @@ library(covidHubUtils)
 library(ggforce)
 
 # forecast_date <- as.character(lubridate::floor_date(Sys.Date(), unit = "week") + 1)
-forecast_date <- as.character(Sys.Date()-1)
+forecast_date <- as.character(Sys.Date())
 reference_date <- as.Date(forecast_date) - 2
+
+if (!dir.exists('plots')) dir.create('plots')
+if (!dir.exists('plots/covid')) dir.create('plots/covid')
 
 # load ensemble back in and bind with other baselines for plotting
 forecasts <- covidHubUtils::load_forecasts_repo(

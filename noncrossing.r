@@ -1,11 +1,13 @@
 library(tidyverse)
 
+forecast_date <- as.character(Sys.Date())
+
 for (pathogen in c('covid', 'flu')) {
-    file_path <- paste0('submissions/', pathogen, '/UMass-gbq/2022-12-04-UMass-gbq.csv')
+    file_path <- paste0('submissions/', pathogen, '/UMass-gbq/', forecast_date, '-UMass-gbq.csv')
     fc <- readr::read_csv(file_path)
 
     q_noncross_fc <- fc %>%
-        dplyr::filter(type == "quantile") %>%
+        dplyr::filter(type == "quantile", target != "0 wk ahead inc flu hosp") %>%
         dplyr::arrange(location, target_end_date, quantile) %>%
         dplyr::group_by(location, target_end_date, target) %>%
         dplyr::mutate(

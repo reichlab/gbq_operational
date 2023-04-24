@@ -1,4 +1,4 @@
-# R CMD BATCH --vanilla '--args GA IN TX' drop_locations.R
+# R CMD BATCH --vanilla '--args CA CO MN OR WA' drop_locations_flu.R
 
 library(covidData)
 library(tidyverse)
@@ -9,7 +9,7 @@ fips_to_drop <- covidData::fips_codes %>%
     dplyr::filter(abbreviation %in% states_to_drop) %>%
     dplyr::pull(location)
 
-latest_file <- max(Sys.glob('submissions/UMass-gbq/*.csv'))
+latest_file <- max(Sys.glob('submissions/flu/UMass-gbq/*-UMass-gbq.csv'))
 
 file.copy(
     latest_file,

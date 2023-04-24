@@ -7,6 +7,9 @@ library(ggforce)
 forecast_date <- as.character(Sys.Date())
 reference_date <- as.Date(forecast_date) - 2
 
+if (!dir.exists('plots')) dir.create('plots')
+if (!dir.exists('plots/flu')) dir.create('plots/flu')
+
 # load ensemble back in and bind with other baselines for plotting
 forecasts <- covidHubUtils::load_forecasts_repo(
   file_path = 'submissions/flu/',
