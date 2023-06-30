@@ -7,13 +7,15 @@ for (pathogen in c("covid", "flu")) {
     data <- covidData::load_data(
         spatial_resolution = c("state", "national"),
         temporal_resolution = "daily",
-        drop_last_date = TRUE,
+        # drop_last_date = TRUE,
+        drop_last_date = FALSE,
         measure = ifelse(pathogen == "covid",
                          "hospitalizations",
                          "flu hospitalizations")
     ) %>%
         dplyr::group_by(location) %>%
-        dplyr::filter(date >= "2020-10-01", date < max(date)) %>%
+        dplyr::filter(date >= "2020-10-01") %>%
+        # dplyr::filter(date >= "2020-10-01", date < max(date)) %>%
         dplyr::transmute(location, date, hosps = inc) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(location, date)
