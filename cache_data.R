@@ -3,7 +3,8 @@ library(covidData)
 
 if (!dir.exists("data")) dir.create("data")
 
-for (pathogen in c("covid", "flu")) {
+for (pathogen in "covid") {
+    print(pathogen)
     data <- covidData::load_data(
         spatial_resolution = c("state", "national"),
         temporal_resolution = "daily",
@@ -19,6 +20,8 @@ for (pathogen in c("covid", "flu")) {
         dplyr::transmute(location, date, hosps = inc) %>%
         dplyr::ungroup() %>%
         dplyr::arrange(location, date)
+    
+    print(max(data$date))
     
     data <- data %>%
         dplyr::left_join(

@@ -2,7 +2,7 @@ library(tidyverse)
 
 forecast_date <- as.character(Sys.Date())
 
-for (pathogen in c('covid', 'flu')) {
+for (pathogen in 'covid') {
     file_path <- paste0('submissions/', pathogen, '/UMass-gbq/', forecast_date, '-UMass-gbq.csv')
     fc <- readr::read_csv(file_path)
 

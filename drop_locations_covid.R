@@ -1,4 +1,4 @@
-# R CMD BATCH --vanilla '--args HI CO' drop_locations.R
+# R CMD BATCH --vanilla '--args HI CO' drop_locations_covid.R
 
 library(covidData)
 library(tidyverse)
